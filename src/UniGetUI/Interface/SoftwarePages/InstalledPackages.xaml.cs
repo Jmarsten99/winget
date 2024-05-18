@@ -342,7 +342,7 @@ namespace UniGetUI.Interface
 
                 var fileName = Tools.GetSettingsValue("ChangeBackupFileName");
                 if (fileName == "")
-                    fileName = Tools.Translate("{pcName} installed packages").Replace("{pcName}", Environment.MachineName);
+                    fileName = Tools.Translate("{pcName} installed packages", new Dictionary<string, object>{ { "pcName", Environment.MachineName } });
 
                 if (Tools.GetSettings("EnableBackupTimestamping"))
                     fileName += " " + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
@@ -451,7 +451,7 @@ namespace UniGetUI.Interface
                     {
                         BackgroundText.Text = Tools.AutoTranslated("No results were found matching the input criteria");
                         SourcesPlaceholderText.Text = Tools.AutoTranslated("No packages were found");
-                        MainSubtitle.Text = Tools.Translate("{0} packages were found, {1} of which match the specified filters.").Replace("{0}", Packages.Count.ToString()).Replace("{1}", (FilteredPackages.Count()).ToString());
+                        MainSubtitle.Text = Tools.Translate("{0} packages were found, {1} of which match the specified filters.", Packages.Count, FilteredPackages.Count());
                     }
                     BackgroundText.Visibility = Visibility.Visible;
                 }
@@ -460,7 +460,7 @@ namespace UniGetUI.Interface
             else
             {
                 BackgroundText.Visibility = Visibility.Collapsed;
-                MainSubtitle.Text = Tools.Translate("{0} packages were found, {1} of which match the specified filters.").Replace("{0}", Packages.Count.ToString()).Replace("{1}", (FilteredPackages.Count()).ToString());
+                MainSubtitle.Text = Tools.Translate("{0} packages were found, {1} of which match the specified filters.", Packages.Count, FilteredPackages.Count());
             }
         }
 
@@ -634,7 +634,7 @@ namespace UniGetUI.Interface
             dialog.PrimaryButtonText = Tools.Translate("No");
             dialog.SecondaryButtonText = Tools.Translate("Yes");
             dialog.DefaultButton = ContentDialogButton.Primary;
-            dialog.Content = Tools.Translate("Do you really want to uninstall {0}?").Replace("{0}", package.Name);
+            dialog.Content = Tools.Translate("Do you really want to uninstall {0}?", package.Name);
 
             if (await Tools.App.MainWindow.ShowDialogAsync(dialog) == ContentDialogResult.Secondary)
                 Tools.AddOperationToList(new UninstallPackageOperation(package, options));
@@ -660,7 +660,7 @@ namespace UniGetUI.Interface
             dialog.DefaultButton = ContentDialogButton.Primary;
 
             StackPanel p = new();
-            p.Children.Add(new TextBlock() { Text = Tools.Translate("Do you really want to uninstall the following {0} packages?").Replace("{0}", packages.Length.ToString()), Margin = new Thickness(0, 0, 0, 5) });
+            p.Children.Add(new TextBlock() { Text = Tools.Translate("Do you really want to uninstall the following {0} packages?", packages.Length), Margin = new Thickness(0, 0, 0, 5) });
 
             string pkgList = "";
             foreach (Package package in packages)

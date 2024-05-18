@@ -30,7 +30,7 @@ namespace UniGetUI.Interface.Pages.AboutPages
         public AboutUniGetUI()
         {
             this.InitializeComponent();
-            VersionText.Text = Tools.Translate("You have installed WingetUI Version {0}").Replace("{0}", CoreData.VersionName);
+            VersionText.Text = Tools.Translate("You have installed WingetUI Version {0}", CoreData.VersionName);
 
         }
     }

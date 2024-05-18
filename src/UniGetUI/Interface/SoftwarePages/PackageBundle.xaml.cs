@@ -330,7 +330,7 @@ namespace UniGetUI.Interface
                     {
                         BackgroundText.Text = Tools.AutoTranslated("No results were found matching the input criteria");
                         SourcesPlaceholderText.Text = Tools.AutoTranslated("No packages were found");
-                        MainSubtitle.Text = Tools.Translate("{0} packages were found, {1} of which match the specified filters.").Replace("{0}", Packages.Count.ToString()).Replace("{1}", (MatchingList.Length - HiddenPackagesDueToSource).ToString());
+                        MainSubtitle.Text = Tools.Translate("{0} packages were found, {1} of which match the specified filters.", Packages.Count, MatchingList.Length - HiddenPackagesDueToSource);
                     }
                     BackgroundText.Visibility = Visibility.Visible;
                 }
@@ -339,7 +339,7 @@ namespace UniGetUI.Interface
             else
             {
                 BackgroundText.Visibility = Visibility.Collapsed;
-                MainSubtitle.Text = Tools.Translate("{0} packages were found, {1} of which match the specified filters.").Replace("{0}", Packages.Count.ToString()).Replace("{1}", (MatchingList.Length - HiddenPackagesDueToSource).ToString());
+                MainSubtitle.Text = Tools.Translate("{0} packages were found, {1} of which match the specified filters.", Packages.Count, MatchingList.Length - HiddenPackagesDueToSource);
             }
         }
 
